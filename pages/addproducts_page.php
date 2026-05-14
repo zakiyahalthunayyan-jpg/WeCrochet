@@ -1,0 +1,193 @@
+<?php
+// Maryam Shahin 2240001335
+
+include("../includes/Connection.php");
+
+$message = "";
+$msg_type = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $stock = $_POST['stock'];
+    $description = $_POST['description'];
+    $category = $_POST['category'];
+
+    // Image Upload
+    $image_name = $_FILES['image']['name'];
+    $tmp_name = $_FILES['image']['tmp_name'];
+
+    $folder = "../images/" . $image_name;
+
+    move_uploaded_file($tmp_name, $folder);
+
+    // Insert Product
+    $sql = "INSERT INTO products
+            (P_Name, P_Price, P_Stock, P_Image, P_Description, P_Category)
+            VALUES
+            ('$name', '$price', '$stock', '$image_name', '$description', '$category')";
+
+    if (mysqli_query($conn, $sql)) {
+
+        $message = "Product added successfully!";
+        $msg_type = "success";
+
+    } else {
+
+        $message = "Error: " . mysqli_error($conn);
+        $msg_type = "error";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Add Product</title>
+
+<link rel="stylesheet" href="../Styles/addproducts_page.css">
+
+<script>
+
+function validateForm() {
+
+    let name = document.getElementById("name").value;
+    let stock = document.getElementById("stock").value;
+    let price = document.getElementById("price").value;
+    let description = document.getElementById("description").value;
+    let category = document.getElementById("category").value;
+    let image = document.getElementById("image").value;
+
+    if (name == "") {
+
+        alert("Product name is required");
+        return false;
+    }
+
+    if (image == "") {
+
+        alert("Please upload product image");
+        return false;
+    }
+
+    if (stock == "" || stock < 0) {
+
+        alert("Please enter valid stock quantity");
+        return false;
+    }
+
+    if (price == "" || price <= 0) {
+
+        alert("Please enter valid price");
+        return false;
+    }
+
+    if (description == "") {
+
+        alert("Description is required");
+        return false;
+    }
+
+    if (category == "") {
+
+        alert("Please select category");
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Add Products Here</h3>
+
+    <?php if (!empty($message)) { ?>
+
+        <p class="<?php echo $msg_type; ?>">
+
+            <?php echo $message; ?>
+
+        </p>
+
+    <?php } ?>
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          onsubmit="return validateForm()">
+
+        <label>Name:</label>
+
+        <input type="text"
+               name="name"
+               id="name"
+               required>
+
+        <label>Image:</label>
+
+        <input type="file"
+               name="image"
+               id="image"
+               required>
+
+        <label>Stock:</label>
+
+        <input type="number"
+               name="stock"
+               id="stock"
+               required>
+
+        <label>Price:</label>
+
+        <input type="number"
+               step="0.01"
+               name="price"
+               id="price"
+               required>
+
+        <label>Description:</label>
+
+        <textarea name="description"
+                  id="description"
+                  required></textarea>
+
+        <label>Category:</label>
+
+        <select name="category"
+                id="category"
+                required>
+
+            <option value="">Select Category</option>
+
+            <option value="Crocheted Toys">
+                Crocheted Toys
+            </option>
+
+            <option value="Crocheted Flowers">
+                Crocheted Flowers
+            </option>
+
+        </select>
+
+        <button type="submit">
+
+            Add Product
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
