@@ -124,7 +124,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <textarea name="description" id="description"></textarea>
 
         <label>Category:</label>
-        <input type="text" name="category" id="category">
+
+<select name="category" id="category">
+    <option value="">Select Category</option>
+    <option value="Crochet Toys">Crochet Toys</option>
+    <option value="Crochet Flowers">Crochet Flowers</option>
+</select>
+
 
         <button type="submit">Modify Product</button>
 

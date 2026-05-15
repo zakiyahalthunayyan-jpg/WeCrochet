@@ -122,13 +122,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <option value="">Select Category</option>
 
-            <option value="Crocheted Toys">
-                Crocheted Toys
-            </option>
+            <option value="Crochet Toys">
+    Crochet Toys
+</option>
 
-            <option value="Crocheted Flowers">
-                Crocheted Flowers
-            </option>
+<option value="Crochet Flowers">
+    Crochet Flowers
+</option>
 
         </select>
 
