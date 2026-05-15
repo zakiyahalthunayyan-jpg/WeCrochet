@@ -4,8 +4,12 @@
 include("../includes/header.php");
 include("../includes/Connection.php");
 
-$id = (int) $_GET['id'];
+if (!isset($_GET['id'])) {
+    header("Location: ../index.php");
+    exit();
+}
 
+$id = (int) $_GET['id'];
 $query = "SELECT * FROM products WHERE P_ID = $id";
 $result = mysqli_query($conn, $query);
 $product = mysqli_fetch_assoc($result);
@@ -170,7 +174,7 @@ if (isset($_POST['add_to_cart'])) {
 
         <form method="POST" onsubmit="return validateForm()">
 
-            <input type="number"
+            <input type="number" required
                    name="quantity"
                    id="quantity"
                    class="quantity-input"

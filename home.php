@@ -1,22 +1,23 @@
-// 	Zainab Ali Alfaraj 2240006683
 <?php
+// Zainab Ali Alfaraj 2240006683
+
 include("includes/header.php");
 include("includes/Connection.php");
 ?>
 
-<img src="images/headstyle.png" class="headstyle headstyle-right">
-<img src="images/headstyle.png" class="headstyle headstyle-left">
+<img src="images/headstyle.png" class="headstyle headstyle-right" alt="Decoration">
+<img src="images/headstyle.png" class="headstyle headstyle-left" alt="Decoration">
 
 <div class="hero-section">
     <h1>🧶 Welcome to WeCrochet</h1>
-    <p>Hand made crochet crafted with love</p>
+    <p>Handmade crochet crafted with love</p>
     <br>
     <a href="index.php" class="btn btn-primary hero-btn">Shop Now ✨</a>
 </div>
 
 <div class="featured-title">
     <h2>🛍️ Our Products</h2>
-    <p>Check out some of our hand made pieces</p>
+    <p>Check out some of our handmade pieces</p>
 </div>
 
 <div class="featured-container">
@@ -29,9 +30,15 @@ include("includes/Connection.php");
             while ($row = mysqli_fetch_assoc($result)) {
             ?>
                 <td width="25%" valign="top" class="featured-product">
-<a href="pages/product.php?id=<?php echo $row['P_ID']; ?>">                        <img src="images/<?php echo $row['P_Image']; ?>">
-                        <p class="product-name"><?php echo $row['P_Name']; ?></p>
-                        <p class="product-price"><?php echo $row['P_Price']; ?> SAR</p>
+                    <a href="pages/product.php?id=<?php echo $row['P_ID']; ?>">
+                        <img src="images/<?php echo htmlspecialchars($row['P_Image']); ?>"
+                             alt="<?php echo htmlspecialchars($row['P_Name']); ?>">
+                        <p class="product-name">
+                            <?php echo htmlspecialchars($row['P_Name']); ?>
+                        </p>
+                        <p class="product-price">
+                            <?php echo htmlspecialchars($row['P_Price']); ?> SAR
+                        </p>
                     </a>
                 </td>
             <?php } ?>
@@ -44,28 +51,42 @@ include("includes/Connection.php");
 </div>
 
 <?php
-mysqli_close($conn);
-?>
-
-<?php
 if (isset($_COOKIE['past_purchases'])) {
+
     $past = json_decode($_COOKIE['past_purchases'], true);
 
     if (!empty($past)) {
 ?>
+
         <h2 class="page-title past-title">Your Past Purchases</h2>
 
         <div class="products-grid past-grid">
+
             <?php foreach ($past as $item) { ?>
+
                 <div class="product-card past-card">
-                    <img src="images/<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>">
+
+                    <img src="images/<?php echo htmlspecialchars($item['image']); ?>"
+                         alt="<?php echo htmlspecialchars($item['name']); ?>">
+
                     <div class="card-info past-info">
-                        <h3><?php echo $item['name']; ?></h3>
-                        <p class="price"><?php echo $item['price']; ?> SAR</p>
+
+                        <h3>
+                            <?php echo htmlspecialchars($item['name']); ?>
+                        </h3>
+
+                        <p class="price">
+                            <?php echo htmlspecialchars($item['price']); ?> SAR
+                        </p>
+
                     </div>
+
                 </div>
+
             <?php } ?>
+
         </div>
+
 <?php
     }
 }
@@ -109,4 +130,7 @@ if (isset($_COOKIE['past_purchases'])) {
     </div>
 </div>
 
-<?php include("includes/footer.php"); ?>
+<?php
+mysqli_close($conn);
+include("includes/footer.php");
+?>

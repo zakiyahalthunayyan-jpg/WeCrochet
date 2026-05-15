@@ -1,5 +1,15 @@
+
 <?php
 // Maryam Shahin 2240001335
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_logged_in'])) {
+    header("Location: LogIn_Admin.php");
+    exit();
+}
 
 include("../includes/Connection.php");
 

@@ -187,7 +187,8 @@ if (isset($_POST['buy'])) {
 
                     <td>
                         <a href="cart.php?delete=<?php echo $index; ?>"
-                           class="btn btn-danger small-btn">
+                           class="btn btn-danger small-btn"
+                           onclick="return confirmDelete()">
                             Delete
                         </a>
                     </td>
@@ -204,7 +205,9 @@ if (isset($_POST['buy'])) {
 
         <div class="cart-actions">
 
-            <a href="cart.php?empty=1" class="btn btn-danger">
+            <a href="cart.php?empty=1"
+               class="btn btn-danger"
+               onclick="return confirmEmptyCart()">
                 Empty Cart 🗑️
             </a>
 
@@ -215,7 +218,8 @@ if (isset($_POST['buy'])) {
             <form method="POST" class="inline-form">
                 <button type="submit"
                         name="buy"
-                        class="btn btn-success">
+                        class="btn btn-success"
+                        onclick="return confirmBuy()">
                     Buy Now ✅
                 </button>
             </form>
@@ -251,6 +255,21 @@ function validateQty(input) {
         alert("Quantity exceeds available stock");
         input.value = max;
     }
+}
+
+function confirmDelete() {
+
+    return confirm("Are you sure you want to delete this item?");
+}
+
+function confirmEmptyCart() {
+
+    return confirm("Are you sure you want to empty the cart?");
+}
+
+function confirmBuy() {
+
+    return confirm("Are you sure you want to complete the purchase?");
 }
 </script>
 
