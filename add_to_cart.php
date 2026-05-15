@@ -49,7 +49,7 @@ if (isset($_POST['quick_add'])) {
     }
 
     mysqli_close($conn);
-    header("Location: index.php");
+    header("Location: products.php");
     exit();
 }
 ?>

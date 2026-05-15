@@ -5,17 +5,23 @@ include("../includes/header.php");
 include("../includes/Connection.php");
 
 if (!isset($_GET['id'])) {
-    header("Location: ../index.php");
+
+    header("Location: ../products.php");
     exit();
 }
 
 $id = (int) $_GET['id'];
+
 $query = "SELECT * FROM products WHERE P_ID = $id";
+
 $result = mysqli_query($conn, $query);
+
 $product = mysqli_fetch_assoc($result);
 
 if (!$product) {
+
     echo "<p>Product not found.</p>";
+
     include("../includes/footer.php");
     exit();
 }
@@ -41,18 +47,22 @@ if (isset($_POST['add_to_cart'])) {
                 if ($new_qty <= $product['P_Stock']) {
 
                     $item['quantity'] = $new_qty;
+
                     $found = true;
 
-                    header("Location: product.php?id=$id&added=1");
+                    header("Location: product_details.php?id=$id&added=1");
                     exit();
 
                 } else {
 
-                    $message = "Sorry, you already have " . $item['quantity'] .
-                               " in your cart. Only " . $product['P_Stock'] .
+                    $message = "Sorry, you already have " .
+                               $item['quantity'] .
+                               " in your cart. Only " .
+                               $product['P_Stock'] .
                                " items are available in stock.";
 
                     $msg_type = "error";
+
                     $found = true;
                 }
 
@@ -71,7 +81,7 @@ if (isset($_POST['add_to_cart'])) {
                 'stock' => $product['P_Stock']
             );
 
-            header("Location: product.php?id=$id&added=1");
+            header("Location: product_details.php?id=$id&added=1");
             exit();
         }
 
@@ -82,7 +92,10 @@ if (isset($_POST['add_to_cart'])) {
 
     } else {
 
-        $message = "Sorry, only " . $product['P_Stock'] . " items available in stock.";
+        $message = "Sorry, only " .
+                   $product['P_Stock'] .
+                   " items available in stock.";
+
         $msg_type = "error";
     }
 }
@@ -90,46 +103,14 @@ if (isset($_POST['add_to_cart'])) {
 
 <script>
     var productStock = <?php echo $product['P_Stock']; ?>;
-
-    function openHelp() {
-        alert(
-            "Help Window\n\n" +
-            "1- Enter quantity.\n" +
-            "2- Click Add to Cart.\n" +
-            "3- Stock must not exceed available quantity."
-        );
-    }
-
-    function validateForm() {
-
-        let qty = document.getElementById("quantity").value;
-
-        if (qty == "") {
-            alert("Quantity is required");
-            return false;
-        }
-
-        if (isNaN(qty)) {
-            alert("Quantity must be a number");
-            return false;
-        }
-
-        if (qty <= 0) {
-            alert("Please enter valid quantity");
-            return false;
-        }
-
-        if (qty > productStock) {
-            alert("Quantity exceeds stock");
-            return false;
-        }
-
-        return true;
-    }
 </script>
 
 <div class="product-top">
-    <a href="../index.php" class="back-link">← Back to Products</a>
+
+    <a href="../products.php" class="back-link">
+        ← Back
+    </a>
+
 </div>
 
 <div class="product-detail">
@@ -139,14 +120,18 @@ if (isset($_POST['add_to_cart'])) {
 
     <div class="info">
 
-        <h1><?php echo htmlspecialchars($product['P_Name']); ?></h1>
+        <h1>
+            <?php echo htmlspecialchars($product['P_Name']); ?>
+        </h1>
 
         <p class="price">
             <?php echo htmlspecialchars($product['P_Price']); ?> SAR
         </p>
 
         <p class="stock">
-            In Stock: <?php echo htmlspecialchars($product['P_Stock']); ?> items
+            In Stock:
+            <?php echo htmlspecialchars($product['P_Stock']); ?>
+            items
         </p>
 
         <p class="description">
@@ -155,26 +140,32 @@ if (isset($_POST['add_to_cart'])) {
 
         <p>
             <strong>Category:</strong>
+
             <?php echo htmlspecialchars($product['P_Category']); ?>
         </p>
 
         <br>
 
         <?php if (isset($_GET['added'])) { ?>
+
             <p class="success-message">
                 Product added to cart successfully!
             </p>
+
         <?php } ?>
 
         <?php if (isset($message) && $msg_type == "error") { ?>
+
             <p class="error-message">
                 <?php echo $message; ?>
             </p>
+
         <?php } ?>
 
-        <form method="POST" onsubmit="return validateForm()">
+        <form method="POST" id="cartForm">
 
-            <input type="number" required
+            <input type="number"
+                   required
                    name="quantity"
                    id="quantity"
                    class="quantity-input"
@@ -185,13 +176,17 @@ if (isset($_POST['add_to_cart'])) {
             <button type="submit"
                     name="add_to_cart"
                     class="btn btn-primary">
+
                 Add to Cart 🛒
+
             </button>
 
             <button type="button"
-                    onclick="openHelp()"
+                    id="helpBtn"
                     class="btn btn-warning">
+
                 Help ❓
+
             </button>
 
         </form>
@@ -205,6 +200,8 @@ if (isset($_POST['add_to_cart'])) {
     </div>
 
 </div>
+
+<script src="../js/product_details.js"></script>
 
 <?php
 mysqli_close($conn);

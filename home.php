@@ -12,8 +12,7 @@ include("includes/Connection.php");
     <h1>🧶 Welcome to WeCrochet</h1>
     <p>Handmade crochet crafted with love</p>
     <br>
-    <a href="index.php" class="btn btn-primary hero-btn">Shop Now ✨</a>
-</div>
+<a href="products.php" class="btn btn-primary hero-btn">Shop Now ✨</a></div>
 
 <div class="featured-title">
     <h2>🛍️ Our Products</h2>
@@ -30,8 +29,7 @@ include("includes/Connection.php");
             while ($row = mysqli_fetch_assoc($result)) {
             ?>
                 <td width="25%" valign="top" class="featured-product">
-                    <a href="pages/product.php?id=<?php echo $row['P_ID']; ?>">
-                        <img src="images/<?php echo htmlspecialchars($row['P_Image']); ?>"
+<a href="pages/product_details.php?id=<?php echo $row['P_ID']; ?>">                        <img src="images/<?php echo htmlspecialchars($row['P_Image']); ?>"
                              alt="<?php echo htmlspecialchars($row['P_Name']); ?>">
                         <p class="product-name">
                             <?php echo htmlspecialchars($row['P_Name']); ?>
@@ -46,8 +44,7 @@ include("includes/Connection.php");
     </table>
 
     <div class="view-all">
-        <a href="index.php" class="btn btn-primary">View All Products →</a>
-    </div>
+<a href="products.php" class="btn btn-primary">View All Products →</a>    </div>
 </div>
 
 <?php

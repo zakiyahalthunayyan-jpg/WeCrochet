@@ -99,9 +99,7 @@ $result = $conn->query($sql);
                    value="<?php if (isset($_GET['search'])) echo htmlspecialchars($_GET['search']); ?>">
 
             <button type="submit">
-
                 Search
-
             </button>
 
         </form>
@@ -223,9 +221,7 @@ $result = $conn->query($sql);
             <tr>
 
                 <td colspan="9">
-
                     No products found.
-
                 </td>
 
             </tr>
@@ -238,46 +234,7 @@ $result = $conn->query($sql);
 
 </div>
 
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    // Delete confirmation
-    let deleteButtons = document.querySelectorAll(".delete-btn");
-
-    deleteButtons.forEach(function(button) {
-
-        button.addEventListener("click", function(event) {
-
-            let confirmDelete = confirm(
-                "Are you sure you want to delete this product?"
-            );
-
-            if (!confirmDelete) {
-
-                event.preventDefault();
-            }
-        });
-    });
-
-    // Logout confirmation
-    let logoutButton = document.querySelector(".logout-btn");
-
-    logoutButton.addEventListener("click", function(event) {
-
-        let confirmLogout = confirm(
-            "Are you sure you want to logout?"
-        );
-
-        if (!confirmLogout) {
-
-            event.preventDefault();
-        }
-    });
-
-});
-
-</script>
+<script src="../js/admin.js"></script>
 
 </body>
 </html>

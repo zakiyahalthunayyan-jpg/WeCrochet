@@ -27,8 +27,7 @@ $result = mysqli_query($conn, $query);
 
             <div class="product-card">
 
-                <a href="pages/product.php?id=<?php echo (int)$row['P_ID']; ?>">
-
+<a href="pages/product_details.php?id=<?php echo (int)$row['P_ID']; ?>">
                     <img src="images/<?php echo htmlspecialchars($row['P_Image']); ?>"
                          alt="<?php echo htmlspecialchars($row['P_Name']); ?>">
 

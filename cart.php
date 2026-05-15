@@ -109,7 +109,9 @@ if (isset($_POST['buy'])) {
 ?>
 
 <div class="cart-top">
-    <a href="index.php" class="back-link">← Back</a>
+    <a href="products.php" class="back-link">
+        ← Back
+    </a>
 </div>
 
 <h2 class="page-title">Shopping Cart</h2>
@@ -155,7 +157,6 @@ if (isset($_POST['buy'])) {
                     </td>
 
                     <td>
-
                         <form method="POST" class="inline-form">
 
                             <input type="hidden"
@@ -168,8 +169,7 @@ if (isset($_POST['buy'])) {
                                    min="1"
                                    max="<?php echo $item['stock']; ?>"
                                    required
-                                   class="quantity-input"
-                                   oninput="validateQty(this)">
+                                   class="quantity-input">
 
                             <button type="submit"
                                     name="update"
@@ -178,7 +178,6 @@ if (isset($_POST['buy'])) {
                             </button>
 
                         </form>
-
                     </td>
 
                     <td>
@@ -187,8 +186,7 @@ if (isset($_POST['buy'])) {
 
                     <td>
                         <a href="cart.php?delete=<?php echo $index; ?>"
-                           class="btn btn-danger small-btn"
-                           onclick="return confirmDelete()">
+                           class="btn btn-danger small-btn delete-btn">
                             Delete
                         </a>
                     </td>
@@ -206,20 +204,18 @@ if (isset($_POST['buy'])) {
         <div class="cart-actions">
 
             <a href="cart.php?empty=1"
-               class="btn btn-danger"
-               onclick="return confirmEmptyCart()">
+               class="btn btn-danger empty-btn">
                 Empty Cart 🗑️
             </a>
 
-            <a href="index.php" class="btn btn-warning">
+            <a href="products.php" class="btn btn-warning">
                 Continue Shopping 🛍️
             </a>
 
             <form method="POST" class="inline-form">
                 <button type="submit"
                         name="buy"
-                        class="btn btn-success"
-                        onclick="return confirmBuy()">
+                        class="btn btn-success buy-btn">
                     Buy Now ✅
                 </button>
             </form>
@@ -231,7 +227,7 @@ if (isset($_POST['buy'])) {
         <div class="empty-cart">
             <p>Your cart is empty 🛒</p>
             <br>
-            <a href="index.php" class="btn btn-primary">
+            <a href="products.php" class="btn btn-primary">
                 Start Shopping →
             </a>
         </div>
@@ -240,38 +236,7 @@ if (isset($_POST['buy'])) {
 
 </div>
 
-<script>
-function validateQty(input) {
-
-    let value = parseInt(input.value);
-    let max = parseInt(input.max);
-
-    if (value < 1) {
-        alert("Quantity must be greater than 0");
-        input.value = 1;
-    }
-
-    if (value > max) {
-        alert("Quantity exceeds available stock");
-        input.value = max;
-    }
-}
-
-function confirmDelete() {
-
-    return confirm("Are you sure you want to delete this item?");
-}
-
-function confirmEmptyCart() {
-
-    return confirm("Are you sure you want to empty the cart?");
-}
-
-function confirmBuy() {
-
-    return confirm("Are you sure you want to complete the purchase?");
-}
-</script>
+<script src="js/cart.js"></script>
 
 <?php
 mysqli_close($conn);

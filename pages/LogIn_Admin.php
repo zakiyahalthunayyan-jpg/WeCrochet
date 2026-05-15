@@ -45,31 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>WeCrochet Login</title>
     <link rel="stylesheet" href="../Styles/LogIn_Admin.css">
-
-    <script>
-        function validateLogin() {
-
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-
-            if (username == "") {
-                alert("Username is required");
-                return false;
-            }
-
-            if (password == "") {
-                alert("Password is required");
-                return false;
-            }
-
-            if (password.length < 5) {
-                alert("Password must be at least 5 characters");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 </head>
 
 <body>
@@ -81,7 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>WeCrochet</h1>
 
         <p class="welcome">
-            <img src="../images/logo.1.jpeg" alt="Logo" class="logo">
+            <img src="../images/logo.1.jpeg"
+                 alt="WeCrochet Logo"
+                 class="logo">
 
             Welcome Admin <br>
             Manage your store and control your content easily.
@@ -97,7 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p style="color:red;"><?php echo $error; ?></p>
         <?php } ?>
 
-        <form action="" method="POST" onsubmit="return validateLogin()">
+        <form action=""
+              method="POST"
+              id="loginForm">
 
             <input type="text"
                    id="username"
@@ -112,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                    class="input-box">
 
             <button type="submit" class="login-btn">
-                LogIn
+                Login
             </button>
 
         </form>
@@ -120,6 +99,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 </div>
+
+<script src="../js/login.js"></script>
 
 </body>
 </html>

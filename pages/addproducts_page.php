@@ -1,4 +1,3 @@
-
 <?php
 // Maryam Shahin 2240001335
 
@@ -24,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST['description'];
     $category = $_POST['category'];
 
-    // Image Upload
     $image_name = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
 
@@ -32,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     move_uploaded_file($tmp_name, $folder);
 
-    // Insert Product
     $sql = "INSERT INTO products
             (P_Name, P_Price, P_Stock, P_Image, P_Description, P_Category)
             VALUES
@@ -40,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conn, $sql)) {
 
-        $message = "Product added successfully!";
-        $msg_type = "success";
+        header("Location: AdminPage.php");
+        exit();
 
     } else {
 
@@ -62,58 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <link rel="stylesheet" href="../Styles/addproducts_page.css">
 
-<script>
-
-function validateForm() {
-
-    let name = document.getElementById("name").value;
-    let stock = document.getElementById("stock").value;
-    let price = document.getElementById("price").value;
-    let description = document.getElementById("description").value;
-    let category = document.getElementById("category").value;
-    let image = document.getElementById("image").value;
-
-    if (name == "") {
-
-        alert("Product name is required");
-        return false;
-    }
-
-    if (image == "") {
-
-        alert("Please upload product image");
-        return false;
-    }
-
-    if (stock == "" || stock < 0) {
-
-        alert("Please enter valid stock quantity");
-        return false;
-    }
-
-    if (price == "" || price <= 0) {
-
-        alert("Please enter valid price");
-        return false;
-    }
-
-    if (description == "") {
-
-        alert("Description is required");
-        return false;
-    }
-
-    if (category == "") {
-
-        alert("Please select category");
-        return false;
-    }
-
-    return true;
-}
-
-</script>
-
 </head>
 
 <body>
@@ -125,16 +70,14 @@ function validateForm() {
     <?php if (!empty($message)) { ?>
 
         <p class="<?php echo $msg_type; ?>">
-
             <?php echo $message; ?>
-
         </p>
 
     <?php } ?>
 
     <form method="POST"
           enctype="multipart/form-data"
-          onsubmit="return validateForm()">
+          id="addProductForm">
 
         <label>Name:</label>
 
@@ -190,14 +133,14 @@ function validateForm() {
         </select>
 
         <button type="submit">
-
             Add Product
-
         </button>
 
     </form>
 
 </div>
+
+<script src="../js/add_product.js"></script>
 
 </body>
 </html>
