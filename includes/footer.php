@@ -1,4 +1,6 @@
-<!-- footer.php -->
+<!-- footer.php 
+ // Zainab Ali Alfaraj 2240006683 
+ -->
 <footer class="footer">
 
     <div class="footer-container">

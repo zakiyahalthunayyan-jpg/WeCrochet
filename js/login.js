@@ -1,3 +1,5 @@
+// Zakiyah Al-Thunayyan 2240005958
+
 document.addEventListener("DOMContentLoaded", function () {
 
     let loginForm = document.getElementById("loginForm");

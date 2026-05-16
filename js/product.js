@@ -1,3 +1,5 @@
+// Raghad Alyabis 2240003458
+
 function validateForm() {
     var qty = document.getElementById('quantity').value;
 

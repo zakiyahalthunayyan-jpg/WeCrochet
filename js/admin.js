@@ -1,3 +1,5 @@
+// Hana Mokhles 2240009110
+
 document.addEventListener("DOMContentLoaded", function () {
 
     // Delete confirmation

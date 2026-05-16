@@ -1,3 +1,5 @@
+// Zainab Ali Alfaraj 2240006683
+
 document.addEventListener("DOMContentLoaded", function () {
 
     let quantityInputs = document.querySelectorAll(".quantity-input");
@@ -9,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let value = parseInt(input.value);
             let max = parseInt(input.max);
 
-            if (value < 1) {
+            if (value < 1 || isNaN(value)) {
                 alert("Quantity must be greater than 0");
                 input.value = 1;
             }
@@ -49,11 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    let buyButton = document.querySelector(".buy-btn");
+    let buyForm = document.querySelector("#buy-form");
 
-    if (buyButton) {
+    if (buyForm) {
 
-        buyButton.addEventListener("click", function (event) {
+        buyForm.addEventListener("submit", function (event) {
 
             let confirmBuy = confirm("Are you sure you want to complete the purchase?");
 
@@ -62,4 +64,20 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    let helpBtn = document.querySelector("#help-btn");
+
+    if (helpBtn) {
+
+        helpBtn.addEventListener("click", function () {
+
+            alert("Shopping Cart Help:\n\n" +
+                  "- Update: change quantity then click Update\n" +
+                  "- Delete: remove one item\n" +
+                  "- Empty Cart: remove all items\n" +
+                  "- Buy Now: complete your purchase\n\n" +
+                  "Note: Quantity cannot exceed available stock.");
+        });
+    }
+
 });

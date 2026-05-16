@@ -1,4 +1,6 @@
+
 <?php
+// Zainab Ali Alfaraj 2240006683
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

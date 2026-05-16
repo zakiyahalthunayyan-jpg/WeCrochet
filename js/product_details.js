@@ -1,3 +1,4 @@
+// Raghad Alyabis 2240003458
 document.addEventListener("DOMContentLoaded", function () {
 
     let helpBtn = document.getElementById("helpBtn");

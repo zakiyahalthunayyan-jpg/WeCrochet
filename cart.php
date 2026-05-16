@@ -116,6 +116,10 @@ if (isset($_POST['buy'])) {
 
 <h2 class="page-title">Shopping Cart</h2>
 
+<button id="help-btn" class="btn btn-warning">
+    ❓ Help
+</button>
+
 <div class="cart-container">
 
     <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) { ?>
@@ -157,7 +161,7 @@ if (isset($_POST['buy'])) {
                     </td>
 
                     <td>
-                        <form method="POST" class="inline-form">
+                        <form method="POST" class="inline-form update-form">
 
                             <input type="hidden"
                                    name="index"
@@ -212,12 +216,14 @@ if (isset($_POST['buy'])) {
                 Continue Shopping 🛍️
             </a>
 
-            <form method="POST" class="inline-form">
+            <form method="POST" class="inline-form" id="buy-form">
+
                 <button type="submit"
                         name="buy"
                         class="btn btn-success buy-btn">
                     Buy Now ✅
                 </button>
+
             </form>
 
         </div>
@@ -226,7 +232,9 @@ if (isset($_POST['buy'])) {
 
         <div class="empty-cart">
             <p>Your cart is empty 🛒</p>
+
             <br>
+
             <a href="products.php" class="btn btn-primary">
                 Start Shopping →
             </a>
